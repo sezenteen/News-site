@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-serif">
+
+<!-- Navbar -->
+<nav class="bg-gray-900 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+    <div class="text-3xl font-bold text-white">
+      <a href="/">Мэдээ<span class="text-red-500">.</span></a>
+    </div>
+    <div class="hidden md:flex space-x-6 text-white">
+      <a th:href="@{/}" class="hover:text-blue-400">Нүүр хуудас</a>
+      <a th:href="@{/categories}" class="hover:text-blue-400">Ангилал</a>
+      <a th:href="@{/about}" class="hover:text-blue-400">Бидний тухай</a>
+      <a th:href="@{/contact}" class="hover:text-blue-400">Холбоо барих</a>
+      <a th:href="@{/login}" class="hover:text-blue-400">Нэвтрэх</a>
+    </div>
+    <div class="md:hidden text-white">
+      <button id="menu-btn">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden bg-gray-700">
+    <a th:href="@{/}" class="block px-4 py-2 text-white hover:bg-gray-600">Нүүр хуудас</a>
+    <a th:href="@{/categories}" class="block px-4 py-2 text-white hover:bg-gray-600">Ангилал</a>
+    <a th:href="@{/about}" class="block px-4 py-2 text-white hover:bg-gray-600">Бидний тухай</a>
+    <a th:href="@{/contact}" class="block px-4 py-2 text-white hover:bg-gray-600">Холбоо барих</a>
+    <a th:href="@{/login}" class="block px-4 py-2 text-white hover:bg-gray-600">Нэвтрэх</a>
+  </div>
+</nav>
+
+<!-- Article Content -->
+<main class="container mx-auto py-10 px-4 lg:px-20">
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="p-6">
+      <h1 class="text-3xl font-bold text-gray-900 mb-4" th:text="${article.title}"></h1>
+      <p class="text-sm text-gray-600 mb-2">
+        <strong>Нийтлэгч:</strong> <span th:text="${article.author}"></span>
+      </p>
+      <p class="text-sm text-gray-600 mb-4">
+        <strong>Нийтлэгдсэн:</strong> <span th:text="${article.publishedAt}"></span>
+      </p>
+      <hr class="my-6">
+      <div>
+        <img th:src="${article.imageUrl}" alt="Article Image" class="w-full rounded-lg shadow-md mb-6">
+        <p class="text-gray-800 text-lg leading-relaxed" th:text="${article.content}"></p>
+      </div>
+      <a href="/" class="block mt-6 text-blue-500 hover:text-blue-700 font-medium">← Буцах</a>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-6">
+  <div class="container mx-auto text-center">
+    <p class="text-sm">© 2024 Мэдээ. Бүх эрх хуулиар хамгаалагдсан.</p>
+    <p class="text-sm mt-2">Холбоо барих: <a href="mailto:info@news.mn" class="text-blue-400 hover:underline">info@news.mn</a></p>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>

@@ -1,17 +1,17 @@
 package com.example.amaraa.model.auth;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Lazy;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String username;
     private String password;
     private String level;
@@ -20,11 +20,31 @@ public class User {
     private int age;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",
-                joinColumns = @JoinColumn(name = "user_id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<Role>();
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
+    // Constructors
+    public User( String username, String password, String level, String firstName, String lastName, int age, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.level = level;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.roles = roles;
+    }
+
+    public User() {
+    }
+
+    public User(String username, String password, Set<Role> roles, String level, String firstName, String lastName, int age) {
+    }
+
+    // Getters and Setters for the fields
     public Long getId() {
         return id;
     }
@@ -33,6 +53,7 @@ public class User {
         this.id = id;
     }
 
+    @NotEmpty(message = "username заавал бичнэ!")
     public String getUsername() {
         return username;
     }
@@ -49,12 +70,12 @@ public class User {
         this.password = password;
     }
 
-    public String getType() {
+    public String getLevel() {
         return level;
     }
 
-    public void setType(String type) {
-        this.level = type;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getFirstName() {
@@ -88,4 +109,6 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }
+

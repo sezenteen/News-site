@@ -1,5 +1,6 @@
 package com.example.amaraa.model.Dtos;
 
+import com.example.amaraa.model.auth.Role;
 import lombok.Data;
 
 import java.util.Set;
@@ -8,7 +9,7 @@ import java.util.Set;
 public class UserDTO {
     private String username;
     private String password;
-    private Set<String> roles;
+    private Set<Role> roles;
     private String level;
     private String firstName;
     private String lastName;

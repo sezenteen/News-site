@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мэдээ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-serif">
+
+<!-- Navbar -->
+<nav class="bg-gray-900 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+    <div class="text-3xl font-bold text-white">
+      <a href="/">Мэдээ<span class="text-red-500">.</span></a>
+    </div>
+    <!-- Menu for larger screens -->
+    <div class="hidden md:flex space-x-6 text-white">
+      <a th:href="@{/}" class="hover:text-blue-400">Нүүр хуудас</a>
+      <a th:href="@{/categories}" class="hover:text-blue-400">Ангилал</a>
+      <a th:href="@{/about}" class="hover:text-blue-400">Бидний тухай</a>
+      <a th:href="@{/contact}" class="hover:text-blue-400">Холбоо барих</a>
+      <a th:href="@{/login}" class="hover:text-blue-400">Нэвтрэх</a>
+      <a th:href="@{/admin}" class="hover:text-blue-400">Admin</a>
+    </div>
+    <!-- Hamburger Menu -->
+    <div class="md:hidden text-white">
+      <button id="menu-btn">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden bg-gray-700">
+    <a th:href="@{/}" class="block px-4 py-2 text-white hover:bg-gray-600">Нүүр хуудас</a>
+    <a th:href="@{/categories}" class="block px-4 py-2 text-white hover:bg-gray-600">Ангилал</a>
+    <a th:href="@{/about}" class="block px-4 py-2 text-white hover:bg-gray-600">Бидний тухай</a>
+    <a th:href="@{/contact}" class="block px-4 py-2 text-white hover:bg-gray-600">Холбоо барих</a>
+    <a th:href="@{/login}" class="block px-4 py-2 text-white hover:bg-gray-600">Нэвтрэх</a>
+    <a th:href="@{/admin}" class="hover:text-blue-400">Admin</a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="relative bg-gray-900">
+  <div class="relative">
+    <!-- Hero Background Image -->
+    <img src="https://images.pexels.com/photos/2872418/pexels-photo-2872418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Hero Image" class="w-full h-80 object-cover opacity-60">
+    <!-- Overlay Text -->
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6">
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">
+        Манай мэдээллийн сайтд тавтай морилно уу!
+      </h1>
+      <p class="text-lg lg:text-xl mb-6">
+        Хамгийн сүүлийн үеийн мэдээ, нийтлэлүүдийг эндээс аваарай.
+      </p>
+      <a href="#articles" class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition duration-300">
+        Цаг үеийн мэдээ үзэх
+      </a>
+    </div>
+  </div>
+</section>
+<!-- About text -->
+<section class="bg-white py-10">
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Бидний тухай</h2>
+    <p class="text-lg text-gray-700 leading-relaxed">
+      Манай мэдээний сайт нь уншигч та бүхэнд дэлхийн болон орон нутгийн хамгийн сүүлийн үеийн, бодитой мэдээллийг цаг алдалгүй хүргэх зорилготой.
+      Бид нийгэм, эдийн засаг, соёл урлаг, технологи, спорт зэрэг олон салбарын мэдээг нэг дор цуглуулж, уншигчдынхаа амьдралд үнэ цэнэ нэмэхийг эрмэлздэг.
+      Мэдлэгт суурилсан хандлага, үнэн зөв эх сурвалжуудаар баялаг нийтлэлүүдийг бид танд хүргэж байна.
+    </p>
+    <p class="text-lg text-gray-700 leading-relaxed mt-4">
+      Хамгийн сүүлийн үеийн үйл явдлуудын талаар мэдээлэл авахыг хүсвэл манай сайттай хамт байгаарай.
+      Таны цагийг хэмнэж, найдвартай мэдээлэл хүргэх нь бидний үүрэг юм.
+    </p>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-6">
+  <div class="container mx-auto text-center">
+    <p class="text-sm">© 2024 Мэдээ. Бүх эрх хуулиар хамгаалагдсан.</p>
+    <p class="text-sm mt-2">Холбоо барих: <a href="mailto:info@news.mn" class="text-blue-400 hover:underline">info@news.mn</a></p>
+  </div>
+</footer>
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>

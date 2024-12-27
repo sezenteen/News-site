@@ -1,4 +1,4 @@
-package com.example.amaraa.service;
+package com.example.amaraa.service.auth;
 
 import com.example.amaraa.model.auth.User;
 import com.example.amaraa.repository.auth.RoleRepository;

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ангилалууд</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    h1 {
+      color: #343a40;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .category-list {
+      list-style: none;
+      padding: 0;
+    }
+    .category-list li {
+      margin: 10px 0;
+    }
+    .category-list a {
+      text-decoration: none;
+      color: #007bff;
+      font-size: 1.2em;
+    }
+    .category-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand font-weight-bold" href="/">Мэдээ<span class="text-primary">.</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Нүүр хуудас</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">Админ самбар</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <h1 class="text-center">Ангилалууд</h1>
+  <ul class="category-list text-center">
+    <li th:each="category : ${categories}">
+      <a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name}"></a>
+    </li>
+  </ul>
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary">Нүүр хуудас руу буцах</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-light text-center py-3 mt-5">
+  <div class="container">
+    <p class="text-muted mb-0">© 2024 Мэдээ. Бүх эрх хуулиар хамгаалагдсан.</p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS and Dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

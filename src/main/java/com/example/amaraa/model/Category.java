@@ -1,11 +1,26 @@
 package com.example.amaraa.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-public class Category extends BaseEntity{
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
-    private String imageUrl;
+
+    @OneToMany(mappedBy = "category")
+    private List<Article> articles;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -15,11 +30,11 @@ public class Category extends BaseEntity{
         this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public List<Article> getArticles() {
+        return articles;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }

@@ -1,111 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сонин Мэдээ</title>
+    <title>Мэдээ</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="bg-gray-100 text-gray-900 font-serif">
 
-<!-- Header -->
-<header class="bg-gray-900 shadow-lg">
-    <nav class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
+<!-- Navbar -->
+<nav class="bg-gray-900 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-4">
         <div class="text-3xl font-bold text-white">
-            <a href="/">Сонин<span class="text-yellow-500">Мэдээ</span></a>
+            <a href="/">Мэдээ<span class="text-red-500">.</span></a>
         </div>
-        <!-- Desktop Menu -->
+        <!-- Menu for larger screens -->
         <div class="hidden md:flex space-x-6 text-white">
-            <a href="/" class="hover:text-yellow-500">Нүүр хуудас</a>
-            <a href="/news" class="hover:text-yellow-500">Мэдээ</a>
-            <a href="/categories" class="hover:text-yellow-500">Ангилал</a>
-            <a href="/about" class="hover:text-yellow-500">Бидний тухай</a>
-            <a href="/contact" class="hover:text-yellow-500">Холбоо барих</a>
+            <a th:href="@{/}" class="hover:text-blue-400">Нүүр хуудас</a>
+            <a th:href="@{/categories}" class="hover:text-blue-400">Ангилал</a>
+            <a th:href="@{/about}" class="hover:text-blue-400">Бидний тухай</a>
+            <a th:href="@{/contact}" class="hover:text-blue-400">Холбоо барих</a>
+            <a th:href="@{/login}" class="hover:text-blue-400">Нэвтрэх</a>
+            <a th:href="@{/admin}" class="hover:text-blue-400">Admin</a>
         </div>
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden">
-            <button id="menu-btn" class="text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        <!-- Hamburger Menu -->
+        <div class="md:hidden text-white">
+            <button id="menu-btn">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
         </div>
-    </nav>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden bg-gray-800">
-        <a href="/" class="block px-4 py-2 text-white hover:bg-gray-700">Нүүр хуудас</a>
-        <a href="/news" class="block px-4 py-2 text-white hover:bg-gray-700">Мэдээ</a>
-        <a href="/categories" class="block px-4 py-2 text-white hover:bg-gray-700">Ангилал</a>
-        <a href="/about" class="block px-4 py-2 text-white hover:bg-gray-700">Бидний тухай</a>
-        <a href="/contact" class="block px-4 py-2 text-white hover:bg-gray-700">Холбоо барих</a>
     </div>
-</header>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-gray-700">
+        <a th:href="@{/}" class="block px-4 py-2 text-white hover:bg-gray-600">Нүүр хуудас</a>
+        <a th:href="@{/categories}" class="block px-4 py-2 text-white hover:bg-gray-600">Ангилал</a>
+        <a th:href="@{/about}" class="block px-4 py-2 text-white hover:bg-gray-600">Бидний тухай</a>
+        <a th:href="@{/contact}" class="block px-4 py-2 text-white hover:bg-gray-600">Холбоо барих</a>
+        <a th:href="@{/login}" class="block px-4 py-2 text-white hover:bg-gray-600">Нэвтрэх</a>
+        <a th:href="@{/admin}" class="hover:text-blue-400">Admin</a>
+    </div>
+</nav>
 
 <!-- Hero Section -->
-<section class="bg-yellow-500 text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-4">Өдөр тутмын мэдээг хамгийн түрүүнд уншаарай</h1>
-        <p class="text-lg md:text-xl mb-8">Шуурхай, сонирхолтой, баталгаатай мэдээг СонинМэдээнээс уншина уу!</p>
-        <a href="/latest-news" class="bg-gray-900 hover:bg-gray-800 text-white text-lg font-semibold py-3 px-8 rounded-lg">Онцлох мэдээ үзэх</a>
-    </div>
-</section>
-
-<!-- Featured News Section -->
-<section class="py-16">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8">Онцлох мэдээнүүд</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Single News Card -->
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img src="https://via.placeholder.com/600x400" alt="News" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-2xl font-semibold mb-2">Мэдээний гарчиг 1</h3>
-                    <p class="text-gray-600 mb-4">Энэхүү мэдээний товч тайлбар энд бичигдэнэ...</p>
-                    <a href="#" class="text-yellow-500 font-medium hover:underline">Цааш унших</a>
-                </div>
-            </div>
-            <!-- Additional Cards -->
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img src="https://via.placeholder.com/600x400" alt="News" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-2xl font-semibold mb-2">Мэдээний гарчиг 2</h3>
-                    <p class="text-gray-600 mb-4">Энэхүү мэдээний товч тайлбар энд бичигдэнэ...</p>
-                    <a href="#" class="text-yellow-500 font-medium hover:underline">Цааш унших</a>
-                </div>
-            </div>
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img src="https://via.placeholder.com/600x400" alt="News" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-2xl font-semibold mb-2">Мэдээний гарчиг 3</h3>
-                    <p class="text-gray-600 mb-4">Энэхүү мэдээний товч тайлбар энд бичигдэнэ...</p>
-                    <a href="#" class="text-yellow-500 font-medium hover:underline">Цааш унших</a>
-                </div>
-            </div>
+<section class="relative bg-gray-900">
+    <div class="relative">
+        <!-- Hero Background Image -->
+        <img src="https://images.pexels.com/photos/2872418/pexels-photo-2872418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Hero Image" class="w-full h-80 object-cover opacity-60">
+        <!-- Overlay Text -->
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6">
+            <h1 class="text-4xl lg:text-5xl font-bold mb-4">
+                Манай мэдээллийн сайтд тавтай морилно уу!
+            </h1>
+            <p class="text-lg lg:text-xl mb-6">
+                Хамгийн сүүлийн үеийн мэдээ, нийтлэлүүдийг эндээс аваарай.
+            </p>
+            <a href="#articles" class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition duration-300">
+                Цаг үеийн мэдээ үзэх
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Categories Section -->
-<section class="py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-8">Ангилал</h2>
-        <div class="flex flex-wrap gap-4">
-            <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-lg">Технологи</a>
-            <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-lg">Спорт</a>
-            <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-lg">Соёл урлаг</a>
-            <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-lg">Бизнес</a>
-            <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-6 rounded-lg">Эрүүл мэнд</a>
+
+<!-- Articles Section -->
+<main id="articles" class="container mx-auto py-10">
+    <h2 class="text-3xl font-bold mb-8 text-center">Цаг үеийн мэдээ</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden" th:each="article : ${articles}">
+            <img th:src="${article.imageUrl}" alt="Article image" class="w-full h-40 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-3" th:text="${article.title}"></h3>
+                <p class="text-gray-700 mb-4" th:text="${article.content.substring(0, 100)} + '...'"></p>
+                <a th:href="@{/article/{id}(id=${article.id})}"
+                   class="text-blue-500 font-medium hover:underline">
+                    Цааш унших →
+                </a>
+            </div>
         </div>
     </div>
-</section>
+</main>
 
 <!-- Footer -->
-<footer class="bg-gray-900 text-white py-8">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <p>&copy; 2024 Сонин Мэдээ. Бүх эрх хуулиар хамгаалагдсан.</p>
+<footer class="bg-gray-900 text-white py-6">
+    <div class="container mx-auto text-center">
+        <p class="text-sm">© 2024 Мэдээ. Бүх эрх хуулиар хамгаалагдсан.</p>
+        <p class="text-sm mt-2">Холбоо барих: <a href="mailto:info@news.mn" class="text-blue-400 hover:underline">info@news.mn</a></p>
     </div>
 </footer>
-
 <script>
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');

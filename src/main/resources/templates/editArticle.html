@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мэдээ засах</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 class="text-center">Мэдээ засах</h2>
+  <form action="/admin/editArticle" method="post">
+    <input type="hidden" name="id" th:value="${article.id}"> <!-- Hidden ID field -->
+    <div class="form-group">
+      <label for="title">Гарчиг:</label>
+      <input type="text" id="title" name="title" class="form-control" th:value="${article.title}" required>
+    </div>
+    <div class="form-group">
+      <label for="content">Агуулга:</label>
+      <textarea id="content" name="content" class="form-control" rows="5" th:text="${article.content}" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="author">Нийтлэгч:</label>
+      <input type="text" id="author" name="author" class="form-control" th:value="${article.author}" required>
+    </div>
+    <div class="form-group">
+      <label for="category">Ангилал:</label>
+      <select id="category" name="category.id" class="form-control" required>
+        <option th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category.name}"
+                th:selected="${category.id == article.category.id}">
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Зургийн URL:</label>
+      <input type="text" id="imageUrl" name="imageUrl" class="form-control" th:value="${article.imageUrl}">
+    </div>
+    <div class="text-right">
+      <button type="submit" class="btn btn-success">Хадгалах</button>
+      <a href="/admin" class="btn btn-secondary">Буцах</a>
+    </div>
+  </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
