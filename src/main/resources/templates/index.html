@@ -17,11 +17,11 @@
         <!-- Menu for larger screens -->
         <div class="hidden md:flex space-x-6 text-white">
             <a th:href="@{/}" class="hover:text-blue-400">Нүүр хуудас</a>
-            <a th:href="@{/categories}" class="hover:text-blue-400">Ангилал</a>
+            <a th:href="@{/articles}" class="hover:text-blue-400">Ангилал</a>
             <a th:href="@{/about}" class="hover:text-blue-400">Бидний тухай</a>
             <a th:href="@{/contact}" class="hover:text-blue-400">Холбоо барих</a>
             <a th:href="@{/login}" class="hover:text-blue-400">Нэвтрэх</a>
-            <a th:href="@{/admin}" class="hover:text-blue-400">Admin</a>
+            <a th:href="@{/create}" class="hover:text-blue-400">Admin</a>
         </div>
         <!-- Hamburger Menu -->
         <div class="md:hidden text-white">
@@ -35,7 +35,7 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden bg-gray-700">
         <a th:href="@{/}" class="block px-4 py-2 text-white hover:bg-gray-600">Нүүр хуудас</a>
-        <a th:href="@{/categories}" class="block px-4 py-2 text-white hover:bg-gray-600">Ангилал</a>
+        <a th:href="@{/articles}" class="block px-4 py-2 text-white hover:bg-gray-600">Ангилал</a>
         <a th:href="@{/about}" class="block px-4 py-2 text-white hover:bg-gray-600">Бидний тухай</a>
         <a th:href="@{/contact}" class="block px-4 py-2 text-white hover:bg-gray-600">Холбоо барих</a>
         <a th:href="@{/login}" class="block px-4 py-2 text-white hover:bg-gray-600">Нэвтрэх</a>
@@ -56,7 +56,7 @@
             <p class="text-lg lg:text-xl mb-6">
                 Хамгийн сүүлийн үеийн мэдээ, нийтлэлүүдийг эндээс аваарай.
             </p>
-            <a href="#articles" class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition duration-300">
+            <a th:href="@{/articles}" class="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition duration-300">
                 Цаг үеийн мэдээ үзэх
             </a>
         </div>

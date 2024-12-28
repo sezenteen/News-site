@@ -25,19 +25,13 @@ public class CategoryController {
         return "category"; // Thymeleaf template for categories
     }
 
-    // Show Add Article page (part of the category management)
-    @GetMapping("/addArticle")
-    public String showAddArticlePage(Model model) {
-        model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("article", new Article()); // Bind an empty Article object for the form
-        return "addArticle"; // Thymeleaf template for adding articles
-    }
+//    // Show Add Article page (part of the category management)
+//    @GetMapping("/addArticle")
+//    public String showAddArticlePage(Model model) {
+//        model.addAttribute("categories", categoryService.getAllCategories());
+//        model.addAttribute("article", new Article()); // Bind an empty Article object for the form
+//        return "addArticle"; // Thymeleaf template for adding articles
+//    }
 
-    // Handle adding a new article with category
-    @PostMapping("/addArticle")
-    public String addCategoryArticle(@ModelAttribute Article article) {
-        // Logic for saving the article with category
-        articleService.saveArticle(article); // Assuming this method will set the category
-        return "redirect:/admin/category/categories"; // Redirect to the categories list
-    }
+
 }

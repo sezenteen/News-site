@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private ArticleService articleService;
@@ -20,52 +20,59 @@ public class AdminController {
     @Autowired
     private CategoryService categoryService;
 
-    // Admin dashboard - List all articles
-    @GetMapping
-    public String adminPanel(Model model) {
+//    // Admin dashboard - List all articles
+//    @GetMapping("/admin")
+//    public String adminPanel(Model model) {
+//        List<Article> articles = articleService.getAllArticles();
+//        model.addAttribute("articles", articles);
+//        return "admin";
+//    }
+    @GetMapping("/articles")
+    public String listArticles(Model model) {
         List<Article> articles = articleService.getAllArticles();
         model.addAttribute("articles", articles);
-        return "admin";
+        return "articles/list";
     }
 
-    // Show Add Article Page
-    @GetMapping("/addArticle")
-    public String showAddArticlePage(Model model) {
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-        model.addAttribute("article", new Article()); // Add an empty article for the form
-        return "addArticle";
+    // Show form to create a new article
+    @GetMapping("/create")
+    public String createArticleForm(Model model) {
+        model.addAttribute("article", new Article());
+        model.addAttribute("categories", categoryService.getAllCategories());
+        return "articles/create";
     }
 
-    // Add Article
-    @PostMapping("/admin/addAdminArticle")
-    public String addArticle(@ModelAttribute("article") Article article) {
-        // Logic here
-        return "redirect:/admin";
+    // Save a new article
+    @PostMapping("/save")
+    public String saveArticle(@ModelAttribute Article article) {
+        article.setPublishedAt(LocalDateTime.now());
+        articleService.saveArticle(article);
+        return "redirect:/articles";
     }
 
-
-    // Show Update Article Page
-    @GetMapping("/editArticle/{id}")
-    public String showEditArticlePage(@PathVariable Long id, Model model) {
+    // Show form to edit an article
+    @GetMapping("/edit/{id}")
+    public String editArticleForm(@PathVariable Long id, Model model) {
         Article article = articleService.getArticleById(id);
         List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
         model.addAttribute("article", article);
-        return "editArticle";
+        model.addAttribute("categories", categories);
+        return "articles/edit";
     }
 
-    // Update Article
-    @PostMapping("/editArticle")
-    public String editArticle(@ModelAttribute("article") Article article) {
-        articleService.saveArticle(article); // Reuse save method for both add and update
-        return "redirect:/admin";
+    // Update an article
+    @PostMapping("/update")
+    public String updateArticle(@ModelAttribute Article article) {
+        article.setPublishedAt(LocalDateTime.now()); // Update published date
+        articleService.saveArticle(article);
+        return "redirect:/articles";
     }
 
-    // Delete Article
-    @GetMapping("/deleteArticle/{id}")
+    // Delete an article
+    @GetMapping("/delete/{id}")
     public String deleteArticle(@PathVariable Long id) {
         articleService.deleteArticleById(id);
-        return "redirect:/admin";
+        return "redirect:/articles";
     }
+
 }
